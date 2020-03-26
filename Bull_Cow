@@ -1,0 +1,29 @@
+class Solution {
+ public:
+        string getHint(string secret, string guess) {
+               
+               unordered_map<char, int> count;
+               unsigned bull = 0, cow = 0;
+               string tmp;
+               for (int i = 0; i<secret.size(); i++){
+
+                      if (secret[i] == guess[i]) bull++;
+
+                      else{
+                            count[secret[i]]++;
+                            tmp += guess[i];
+                      }
+               }
+               
+               for (int i = 0; i<tmp.size(); i++){
+                      if (count.find(tmp[i]) != count.end() && count[tmp[i]]>0){
+                             cow++;
+                            count[tmp[i]]--;
+                      }
+               }
+               
+               string bu = to_string(bull), co = to_string(cow);
+               string final = bu + 'A' + co + 'B';
+               return final;
+        }
+ };
